@@ -1,14 +1,14 @@
 import React from 'react';
-import '../App.css';
+import s from './Navbar.module.css';
 
 function Navbar() {
     return (
-        <nav className='nav'>
-            <div><a href="#"></a>Profile</div>
-            <div><a href="#"></a>Messages</div>
-            <div><a href="#"></a>News</div>
-            <div><a href="#"></a>Music</div>
-            <div><a href="#"></a>Settings</div>
+        <nav className={s.nav}>
+            <div className={`${s.item} ${s.active}`}><a href="#"></a>Profile</div>
+            <div className={s.item}><a href="#"></a>Messages</div>
+            <div className={s.item}><a href="#"></a>News</div>
+            <div className={s.item}><a href="#"></a>Music</div>
+            <div className={s.item}><a href="#"></a>Settings</div>
         </nav>
     );
 }
