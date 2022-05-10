@@ -1,12 +1,12 @@
 import React from 'react';
 import s from './Post.module.css';
 
-type PostMessageType = {
+type PostMessagePropsType = {
     message: string,
     likesCount: number
 }
 
-function Post(props: PostMessageType) {
+function Post(props: PostMessagePropsType) {
     return (
         <div className={s.item}>
             <img src="https://i.pinimg.com/originals/ff/a0/9a/ffa09aec412db3f54deadf1b3781de2a.png" alt="avatar"/>
