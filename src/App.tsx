@@ -9,16 +9,33 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 
+type AppPropsType = {
+    posts: {
+        id: number,
+        message: string,
+        likesCount: number
+    }[],
 
-function App() {
+    dialogs: {
+        id: number,
+        name: string
+    }[],
+
+    messages: {
+        id: number,
+        message: string
+    }[]
+}
+
+function App(props: AppPropsType) {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header />
                 <Navbar />
                 <div className='app-wrapper-content'>
-                    <Route path='/profile' render={ () => <Profile />}/>
-                    <Route path='/dialogs' render={ () => <Dialogs />}/>
+                    <Route path='/profile' render={ () => <Profile posts={props.posts}/>}/>
+                    <Route path='/dialogs' render={ () => <Dialogs dialogs={props.dialogs} messages={props.messages}/>}/>
                     <Route path='/news' render={ () => <News />}/>
                     <Route path='/music' render={ () => <Music />}/>
                     <Route path='/settings' render={ () => <Settings />}/>
