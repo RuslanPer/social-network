@@ -10,21 +10,25 @@ import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 
 type AppPropsType = {
-    posts: {
-        id: number,
-        message: string,
-        likesCount: number
-    }[],
-
-    dialogs: {
-        id: number,
-        name: string
-    }[],
-
-    messages: {
-        id: number,
-        message: string
-    }[]
+    state: {
+        profilePage: {
+            posts: {
+                id: number,
+                message: string,
+                likesCount: number
+            }[],
+        },
+        dialogsPage: {
+            dialogs: {
+                id: number,
+                name: string
+            }[],
+            messages: {
+                id: number,
+                message: string
+            }[]
+        }
+    }
 }
 
 function App(props: AppPropsType) {
@@ -34,8 +38,10 @@ function App(props: AppPropsType) {
                 <Header />
                 <Navbar />
                 <div className='app-wrapper-content'>
-                    <Route path='/profile' render={ () => <Profile posts={props.posts}/>}/>
-                    <Route path='/dialogs' render={ () => <Dialogs dialogs={props.dialogs} messages={props.messages}/>}/>
+                    <Route path='/profile'
+                           render={ () => <Profile state={props.state.profilePage}/>}/>
+                    <Route path='/dialogs'
+                           render={ () => <Dialogs state={props.state.dialogsPage}/>}/>
                     <Route path='/news' render={ () => <News />}/>
                     <Route path='/music' render={ () => <Music />}/>
                     <Route path='/settings' render={ () => <Settings />}/>
