@@ -28,10 +28,13 @@ type AppPropsType = {
                 message: string
             }[]
         }
-    }
+    },
+
+    addPost: (postMessage: string) => void,
 }
 
 function App(props: AppPropsType) {
+    console.log(props)
     return (
         <BrowserRouter>
             <div className="app-wrapper">
@@ -39,7 +42,7 @@ function App(props: AppPropsType) {
                 <Navbar />
                 <div className='app-wrapper-content'>
                     <Route path='/profile'
-                           render={ () => <Profile state={props.state.profilePage}/>}/>
+                           render={ () => <Profile state={props.state.profilePage} addPost={props.addPost}/>}/>
                     <Route path='/dialogs'
                            render={ () => <Dialogs state={props.state.dialogsPage}/>}/>
                     <Route path='/news' render={ () => <News />}/>

@@ -7,7 +7,9 @@ type MyPostsPropsType = {
         id: number,
         message: string,
         likesCount: number
-    }[]
+    }[],
+
+    addPost: (postMessage: string) => void,
 }
 
 function MyPosts(props: MyPostsPropsType) {
@@ -18,8 +20,9 @@ function MyPosts(props: MyPostsPropsType) {
 
     let addPost = () => {
         if (newPostElement.current) {
-            alert(newPostElement.current.value);
+            props.addPost(newPostElement.current.value);
         }
+
     }
 
     return (
