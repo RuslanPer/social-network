@@ -9,7 +9,10 @@ type MyPostsPropsType = {
         likesCount: number
     }[],
 
-    addPost: (postMessage: string) => void,
+    newPostText: string,
+
+    addPost: () => void,
+    updateNewPostText: (postMessage: string) => void,
 }
 
 function MyPosts(props: MyPostsPropsType) {
@@ -20,8 +23,13 @@ function MyPosts(props: MyPostsPropsType) {
 
     let addPost = () => {
         if (newPostElement.current) {
-            props.addPost(newPostElement.current.value);
-            newPostElement.current.value = '';
+            props.addPost();
+        }
+    }
+
+    let onPostChange = () => {
+        if (newPostElement.current) {
+            props.updateNewPostText(newPostElement.current.value);
         }
     }
 
@@ -30,7 +38,7 @@ function MyPosts(props: MyPostsPropsType) {
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea ref={newPostElement}></textarea>
+                    <textarea onChange={ onPostChange } ref={ newPostElement } value={ props.newPostText }/>
                 </div>
                 <div>
                     <button onClick={ addPost }>Add post</button>
