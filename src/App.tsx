@@ -34,7 +34,6 @@ type AppPropsType = {
 }
 
 function App(props: AppPropsType) {
-    console.log(props)
     return (
         <BrowserRouter>
             <div className="app-wrapper">
