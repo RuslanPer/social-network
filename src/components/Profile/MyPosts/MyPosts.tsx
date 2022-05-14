@@ -9,10 +9,9 @@ type MyPostsPropsType = {
         likesCount: number
     }[],
 
-    newPostText: string,
+    dispatch: any,
 
-    addPost: () => void,
-    updateNewPostText: (postMessage: string) => void,
+    newPostText: string,
 }
 
 function MyPosts(props: MyPostsPropsType) {
@@ -23,13 +22,17 @@ function MyPosts(props: MyPostsPropsType) {
 
     let addPost = () => {
         if (newPostElement.current) {
-            props.addPost();
+            let action = { type: 'ADD-POST'};
+            props.dispatch(action);
         }
     }
 
     let onPostChange = () => {
+
         if (newPostElement.current) {
-            props.updateNewPostText(newPostElement.current.value);
+            let text = newPostElement.current.value;
+            let action = { type: 'UPDATE-NEW-POST-TEXT', newText: text};
+            props.dispatch(action);
         }
     }
 

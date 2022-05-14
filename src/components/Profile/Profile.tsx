@@ -14,8 +14,7 @@ type ProfilePropsType = {
         newPostText: string
     },
 
-    addPost: () => void,
-    updateNewPostText: (postMessage: string) => void,
+    dispatch: any,
 }
 
 function Profile(props: ProfilePropsType) {
@@ -24,8 +23,7 @@ function Profile(props: ProfilePropsType) {
             <ProfileInfo />
             <MyPosts posts={props.profilePage.posts}
                      newPostText={props.profilePage.newPostText}
-                     addPost={props.addPost}
-                     updateNewPostText={props.updateNewPostText}/>
+                     dispatch={props.dispatch}/>
         </div>
     );
 }
