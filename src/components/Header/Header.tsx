@@ -4,7 +4,9 @@ import s from './Header.module.css';
 function Header() {
     return (
         <header className={s.header}>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/d/db/Zeronet_logo.png" alt="logo"/>
+            <div className={s.logo}>
+                <img src="http://demo.foxthemes.net/socialitev2.2/assets/images/logo.png" alt="logo"/>
+            </div>
         </header>
     );
 }

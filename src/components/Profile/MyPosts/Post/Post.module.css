@@ -1,6 +1,10 @@
-
 .item {
-    color: green;
+    margin-bottom: 20px;
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: white;
+    border: 1px solid #ebe9e6;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
 }
 
 .item img {

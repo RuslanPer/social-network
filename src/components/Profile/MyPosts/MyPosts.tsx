@@ -37,21 +37,18 @@ function MyPosts(props: MyPostsPropsType) {
     }
 
     return (
-        <div className={s.postsBlock}>
-            <h3>My posts</h3>
-            <div>
-                <div>
-                    <textarea onChange={ onPostChange } ref={ newPostElement } value={ props.newPostText }/>
-                </div>
-                <div>
+        <div className={s.postsWrap}>
+            <div className={s.postsBlock}>
+                <div className={s.newPost}>
+                    <textarea placeholder={'What\'s Your Mind ? Hamse!'} onChange={ onPostChange } ref={ newPostElement } value={ props.newPostText }/>
                     <button onClick={ addPost }>Add post</button>
                 </div>
-
-            </div>
-            <div className={s.posts}>
-                {postElements}
+                <div className={s.posts}>
+                    {postElements}
+                </div>
             </div>
         </div>
+
     );
 }
 

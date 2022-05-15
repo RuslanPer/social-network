@@ -4,6 +4,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 
+import './styles/reset.css';
+import './styles/common.css';
+
 type rerenderEntireTreePropsType = {
     profilePage: {
         posts: {
