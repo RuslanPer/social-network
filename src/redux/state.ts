@@ -1,6 +1,32 @@
 type ActionType = {
-    type: string,
-    newText: string,
+    type: string
+    newText: string
+}
+type PostType = {
+    id: number
+    message: string
+    likesCount: number
+}
+type DialogType = {
+    id: number
+    name: string
+}
+type MessageType = {
+    id: number
+    message: string
+}
+type ProfilePageType = {
+    posts: Array<PostType>
+    newPostText: string
+}
+type DialogsPageType = {
+    dialogs: Array<DialogType>
+    messages: Array<MessageType>
+}
+type StateType = {
+    profilePage: ProfilePageType
+    dialogsPage: DialogsPageType
+
 }
 
 const ADD_POST = 'ADD-POST';
@@ -27,6 +53,7 @@ let store = {
                 {id: 2, message: 'How are you?'},
                 {id: 3, message: 'Yo'},
             ],
+
         }
     },
 
