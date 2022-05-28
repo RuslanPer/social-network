@@ -35,7 +35,7 @@ const MyPosts: React.FC<MyPostsPropsType> = (props) => {
                               onChange={ onPostChange }
                               ref={ newPostElement }
                               value={ props.newPostText }/>
-                    <button onClick={ addPost }>Add post</button>
+                    <button onClick={ addPost }>Share</button>
                 </div>
                 <div className={s.posts}>
                     {postElements}

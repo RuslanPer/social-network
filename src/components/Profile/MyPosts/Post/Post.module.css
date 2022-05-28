@@ -1,12 +1,41 @@
 .item {
     margin-bottom: 20px;
-    padding: 1rem;
     border-radius: 10px;
     background-color: white;
     border: 1px solid #ebe9e6;
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
 }
 
-.item img {
-    width: 50px;
+.header {
+    padding: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.avatar {
+    margin-right: 10px;
+}
+
+.avatar img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.name {
+    color: #000;
+    font-weight: 600;
+}
+
+.text {
+    padding: 0 20px 20px;
+}
+
+.footer {
+    border-top: 1px solid rgba(229,231,235);
+    padding: 16px;
+}
+
+.likes {
+    font-weight: 600;
 }
