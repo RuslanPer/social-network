@@ -2,22 +2,14 @@ import React from 'react';
 import s from './Profile.module.css';
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import {ProfilePageType} from '../../redux/state'
 
 type ProfilePropsType = {
-    profilePage: {
-        posts: {
-            id: number,
-            message: string,
-            likesCount: number
-        }[],
-
-        newPostText: string
-    },
-
-    dispatch: any,
+    profilePage: ProfilePageType
+    dispatch: any
 }
 
-function Profile(props: ProfilePropsType) {
+const Profile: React.FC<ProfilePropsType> = (props) => {
     return (
         <div className={s.content}>
             <ProfileInfo />

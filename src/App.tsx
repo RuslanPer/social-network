@@ -5,34 +5,14 @@ import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
+import {StateType} from './redux/state';
 
 type AppPropsType = {
-    state: {
-        profilePage: {
-            posts: {
-                id: number,
-                message: string,
-                likesCount: number
-            }[],
-
-            newPostText: string,
-        },
-        dialogsPage: {
-            dialogs: {
-                id: number,
-                name: string
-            }[],
-            messages: {
-                id: number,
-                message: string
-            }[]
-        }
-    },
-
-    dispatch: any,
+    state: StateType
+    dispatch: any
 }
 
-function App(props: AppPropsType) {
+const App: React.FC<AppPropsType> = (props) => {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
@@ -43,7 +23,7 @@ function App(props: AppPropsType) {
                            render={ () => <Profile profilePage={props.state.profilePage}
                                                    dispatch={props.dispatch} />}/>
                     <Route path='/dialogs'
-                           render={ () => <Dialogs state={props.state.dialogsPage}/>}/>
+                           render={ () => <Dialogs dialogsPage={props.state.dialogsPage}/>}/>
                     <Route path='/news' />
                     <Route path='/music' />
                     <Route path='/settings' />

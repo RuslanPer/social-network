@@ -2,7 +2,7 @@ type ActionType = {
     type: string
     newText: string
 }
-type PostType = {
+export type PostType = {
     id: number
     message: string
     likesCount: number
@@ -15,24 +15,30 @@ type MessageType = {
     id: number
     message: string
 }
-type ProfilePageType = {
+export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
 }
-type DialogsPageType = {
+export type DialogsPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
 }
-type StateType = {
+export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
-
+}
+type StoreType = {
+    _state: StateType
+    _callSubscriber: any
+    getState: any
+    subscribe: any
+    dispatch: any
 }
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
-let store = {
+let store: StoreType = {
     _state: {
         profilePage: {
             posts: [
@@ -57,7 +63,7 @@ let store = {
         }
     },
 
-    _callSubscriber(state: any) {
+    _callSubscriber() {
         debugger;
         console.log('State changed');
     },

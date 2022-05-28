@@ -2,23 +2,16 @@ import React from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
 import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/state";
+import {PostType} from '../../../redux/state';
 
 type MyPostsPropsType = {
-    posts: {
-        id: number,
-        message: string,
-        likesCount: number
-    }[],
-
-    dispatch: any,
-
-    newPostText: string,
+    posts: Array<PostType>
+    dispatch: any
+    newPostText: string
 }
 
-function MyPosts(props: MyPostsPropsType) {
-
+const MyPosts: React.FC<MyPostsPropsType> = (props) => {
     let postElements = props.posts.map( p => <Post message={p.message} likesCount={p.likesCount}/>);
-
     let newPostElement = React.createRef<HTMLTextAreaElement>();
 
     let addPost = () => {
@@ -28,7 +21,6 @@ function MyPosts(props: MyPostsPropsType) {
     }
 
     let onPostChange = () => {
-
         if (newPostElement.current) {
             let text = newPostElement.current.value;
             props.dispatch(updateNewPostTextActionCreator(text));
@@ -39,7 +31,10 @@ function MyPosts(props: MyPostsPropsType) {
         <div className={s.postsWrap}>
             <div className={s.postsBlock}>
                 <div className={s.newPost}>
-                    <textarea placeholder={'What\'s Your Mind ? Hamse!'} onChange={ onPostChange } ref={ newPostElement } value={ props.newPostText }/>
+                    <textarea placeholder={'What\'s Your Mind ? Hamse!'}
+                              onChange={ onPostChange }
+                              ref={ newPostElement }
+                              value={ props.newPostText }/>
                     <button onClick={ addPost }>Add post</button>
                 </div>
                 <div className={s.posts}>
@@ -47,7 +42,6 @@ function MyPosts(props: MyPostsPropsType) {
                 </div>
             </div>
         </div>
-
     );
 }
 

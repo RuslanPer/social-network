@@ -5,7 +5,7 @@ type MessagePropsType = {
     message: string
 }
 
-function Message(props: MessagePropsType) {
+const Message: React.FC<MessagePropsType> = (props) => {
     return (
         <div className={s.message}>{props.message}</div>
     );
