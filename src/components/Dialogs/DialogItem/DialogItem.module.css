@@ -1,0 +1,16 @@
+.link {
+    display: block;
+    padding: 12px 22px;
+    color: #333333;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.link:hover {
+    background: #fafafa;
+}
+
+.active {
+    background: #fafafa;
+}
