@@ -1,18 +1,18 @@
 import React from 'react';
-import s from './Post.module.css';
+import style from './Post.module.css';
 
 type PostMessagePropsType = {
     message: string,
     likesCount: number
 }
 
-function Post(props: PostMessagePropsType) {
+const Post: React.FC<PostMessagePropsType> = ({message, likesCount}) => {
     return (
-        <div className={s.item}>
-            <img src="https://i.pinimg.com/originals/ff/a0/9a/ffa09aec412db3f54deadf1b3781de2a.png" alt="avatar"/>
-            {props.message}
+        <div className={style.item}>
+            <img src="http://demo.foxthemes.net/socialitev2.2/assets/images/avatars/avatar-8.jpg" alt="avatar"/>
+            {message}
             <div>
-                <span>like</span> {props.likesCount}
+                <span>like</span> {likesCount}
             </div>
         </div>
     );

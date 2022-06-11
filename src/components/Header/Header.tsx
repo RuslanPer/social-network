@@ -1,9 +1,9 @@
 import React from 'react';
-import s from './Header.module.css';
+import style from './Header.module.css';
 
-function Header() {
+const Header: React.FC = () => {
     return (
-        <header className={s.header}>
+        <header className={style.header}>
             <img src="https://upload.wikimedia.org/wikipedia/commons/d/db/Zeronet_logo.png" alt="logo"/>
         </header>
     );

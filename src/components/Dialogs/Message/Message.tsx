@@ -1,13 +1,13 @@
 import React from 'react';
-import s from './Message.module.css';
+import style from './Message.module.css';
 
 type MessagePropsType = {
     message: string
 }
 
-function Message(props: MessagePropsType) {
+const Message: React.FC<MessagePropsType> = ({message}) => {
     return (
-        <div className={s.message}>{props.message}</div>
+        <div className={style.message}>{message}</div>
     );
 }
 

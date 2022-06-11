@@ -1,24 +1,48 @@
-let state = {
+export type PostType = {
+    id: number
+    message: string
+    likesCount: number
+}
+type DialogType = {
+    id: number
+    name: string
+}
+type MessageType = {
+    id: number
+    message: string
+}
+export type ProfilePageType = {
+    posts: PostType[]
+    newPostText: string
+}
+export type DialogsPageType = {
+    dialogs: DialogType[]
+    messages: MessageType[]
+}
+export type StateType = {
+    profilePage: ProfilePageType
+    dialogsPage: DialogsPageType
+}
+
+
+
+export const state: StateType = {
     profilePage: {
         posts: [
             {id: 1, message: "Hi, how are you?", likesCount: 0},
             {id: 2, message: "It's my first post", likesCount: 5},
-            {id: 3, message: "Hello world", likesCount: 12},
         ],
+        newPostText: ''
     },
 
     dialogsPage: {
         dialogs: [
-            {id: 1, name: 'Dimych'},
-            {id: 2, name: 'Andrey'},
-            {id: 7, name: 'Ruslan'},
+            {id: 1, name: 'Victor'},
+            {id: 2, name: 'Igor'},
         ],
         messages: [
             {id: 1, message: 'Hi'},
             {id: 2, message: 'How are you?'},
-            {id: 3, message: 'Yo'},
         ],
     }
 }
-
-export default state;
