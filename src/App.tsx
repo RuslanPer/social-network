@@ -8,10 +8,11 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import {StateType} from "./redux/state";
 
 type AppPropsType = {
-    state: StateType
+    state: StateType,
+    addPost: (postMessage: string) => void
 }
 
-const App: React.FC<AppPropsType> = ({state}) => {
+const App: React.FC<AppPropsType> = ({state, addPost}) => {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
@@ -19,7 +20,7 @@ const App: React.FC<AppPropsType> = ({state}) => {
                 <Navbar />
                 <div className='app-wrapper-content'>
                     <Route path='/profile'
-                           render={ () => <Profile profilePage={state.profilePage}/>}/>
+                           render={ () => <Profile profilePage={state.profilePage} addPost={addPost}/>}/>
                     <Route path='/dialogs'
                            render={ () => <Dialogs dialogsPage={state.dialogsPage}/>}/>
                 </div>

@@ -46,3 +46,12 @@ export const state: StateType = {
         ],
     }
 }
+
+export const addPost = (postMessage: string) => {
+    let newPost = {
+        id: 5,
+        message: postMessage,
+        likesCount: 2
+    }
+    state.profilePage.posts.unshift(newPost)
+}
