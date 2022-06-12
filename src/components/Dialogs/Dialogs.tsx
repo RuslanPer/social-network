@@ -10,8 +10,8 @@ type DialogsPropsType = {
 
 const Dialogs: React.FC<DialogsPropsType> = ({dialogsPage}) => {
 
-    let dialogsElements = dialogsPage.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>);
-    let messagesElements = dialogsPage.messages.map( m => <Message message={m.message}/>);
+    let dialogsElements = dialogsPage.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>);
+    let messagesElements = dialogsPage.messages.map( m => <Message key={m.id} message={m.message}/>);
 
     let newMessageElement = React.createRef<HTMLTextAreaElement>()
 

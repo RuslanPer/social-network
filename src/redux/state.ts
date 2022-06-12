@@ -21,14 +21,14 @@ export type DialogsPageType = {
     dialogs: DialogType[]
     messages: MessageType[]
 }
-export type StateType = {
+export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
 }
 
 
 
-export const state: StateType = {
+export const state: RootStateType = {
     profilePage: {
         posts: [
             {id: 1, message: "Hi, how are you?", likesCount: 0},
@@ -50,11 +50,16 @@ export const state: StateType = {
 }
 
 export const addPost = (postMessage: string) => {
-    let newPost = {
-        id: 5,
+    let newPost: PostType = {
+        id: new Date().getTime(),
         message: postMessage,
         likesCount: 2
     }
     state.profilePage.posts.unshift(newPost)
+    rerenderEntireTree(state)
+}
+
+export const updateNewPostText = (newText: string) => {
+    state.profilePage.newPostText = newText
     rerenderEntireTree(state)
 }
