@@ -5,15 +5,13 @@ import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
-import {RootStateType} from "./redux/state";
+import {StoreType} from "./redux/state";
 
 type AppPropsType = {
-    state: RootStateType
-    addPost: (postMessage: string) => void
-    updateNewPostText: (newText: string) => void
+    store: StoreType
 }
 
-const App: React.FC<AppPropsType> = ({state, addPost, updateNewPostText}) => {
+const App: React.FC<AppPropsType> = ({store}) => {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
@@ -21,11 +19,11 @@ const App: React.FC<AppPropsType> = ({state, addPost, updateNewPostText}) => {
                 <Navbar />
                 <div className='app-wrapper-content'>
                     <Route path='/profile'
-                           render={ () => <Profile profilePage={state.profilePage}
-                                                   addPost={addPost}
-                                                   updateNewPostText={updateNewPostText}/>}/>
+                           render={ () => <Profile profilePage={store.getState().profilePage}
+                                                   addPost={store.addPost.bind(store)}
+                                                   updateNewPostText={store.updateNewPostText.bind(store)}/>}/>
                     <Route path='/dialogs'
-                           render={ () => <Dialogs dialogsPage={state.dialogsPage}/>}/>
+                           render={ () => <Dialogs dialogsPage={store.getState().dialogsPage}/>}/>
                 </div>
             </div>
         </BrowserRouter>
