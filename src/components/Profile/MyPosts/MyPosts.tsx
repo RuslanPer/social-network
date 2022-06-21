@@ -1,43 +1,51 @@
 import React from 'react';
-import s from './MyPosts.module.css';
+import style from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/state";
-import {PostType} from '../../../redux/state';
+import {
+    ActionsType,
+    addPostActionCreator,
+    PostType,
+    updateNewPostTextActionCreator,
+} from "../../../redux/state";
 
 type MyPostsPropsType = {
-    posts: Array<PostType>
-    dispatch: any
+    posts: PostType[]
     newPostText: string
+    dispatch: (action: ActionsType) => void
 }
 
-const MyPosts: React.FC<MyPostsPropsType> = (props) => {
-    let postElements = props.posts.map( p => <Post message={p.message} likesCount={p.likesCount}/>);
+const MyPosts: React.FC<MyPostsPropsType> = ({posts, dispatch, newPostText}) => {
+
+    let postElements = posts.map( p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>);
+
     let newPostElement = React.createRef<HTMLTextAreaElement>();
 
-    let addPost = () => {
+    const addPostHandler = () => {
         if (newPostElement.current) {
-            props.dispatch(addPostActionCreator());
+            let text = newPostElement.current.value
+            dispatch(addPostActionCreator(text))
+            dispatch(updateNewPostTextActionCreator(''))
         }
-    }
+    };
 
-    let onPostChange = () => {
+    const onPostChangeHandler = () => {
         if (newPostElement.current) {
-            let text = newPostElement.current.value;
-            props.dispatch(updateNewPostTextActionCreator(text));
+            let text = newPostElement.current.value
+            dispatch(updateNewPostTextActionCreator(text))
         }
     }
 
     return (
-        <div className={s.postsWrap}>
-            <div className={s.postsBlock}>
-                <div className={s.newPost}>
+        <div className={style.postsWrap}>
+            <div className={style.postsBlock}>
+                <div className={style.newPost}>
                     <textarea placeholder={'What\'s Your Mind ? Hamse!'}
-                              onChange={ onPostChange }
+                              onChange={ onPostChangeHandler }
                               ref={ newPostElement }
-                              value={ props.newPostText }/>
-                    <button onClick={ addPost }>Share</button>
+                              value={ newPostText }/>
+                    <button onClick={ addPostHandler }>Share</button>
                 </div>
-                <div className={s.posts}>
+                <div className={style.posts}>
                     {postElements}
                 </div>
             </div>

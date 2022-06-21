@@ -1,10 +1,10 @@
 import React from 'react';
-import s from './Header.module.css';
+import style from './Header.module.css';
 
-function Header() {
+const Header: React.FC = () => {
     return (
-        <header className={s.header}>
-            <div className={s.logo}>
+        <header className={style.header}>
+            <div className={style.logo}>
                 <img src="http://demo.foxthemes.net/socialitev2.2/assets/images/logo.png" alt="logo"/>
             </div>
         </header>

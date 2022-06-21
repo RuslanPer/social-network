@@ -1,7 +1,6 @@
-type ActionType = {
-    type: string
-    newText: string
-}
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+
 export type PostType = {
     id: number
     message: string
@@ -16,29 +15,30 @@ type MessageType = {
     message: string
 }
 export type ProfilePageType = {
-    posts: Array<PostType>
+    posts: PostType[]
     newPostText: string
 }
 export type DialogsPageType = {
-    dialogs: Array<DialogType>
-    messages: Array<MessageType>
+    dialogs: DialogType[]
+    messages: MessageType[]
 }
-export type StateType = {
+export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
 }
-type StoreType = {
-    _state: StateType
-    _callSubscriber: any
-    getState: any
-    subscribe: any
-    dispatch: any
+
+export type StoreType = {
+    _state: RootStateType
+    _callSubscriber: () => void
+    getState: () => RootStateType
+    subscribe: (observer: () => void) => void
+    dispatch: (action: ActionsType) => void
 }
 
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+export type ActionsType = ReturnType<typeof addPostActionCreator> | ReturnType<typeof updateNewPostTextActionCreator>
 
-let store: StoreType = {
+
+export const store: StoreType = {
     _state: {
         profilePage: {
             posts: [
@@ -50,62 +50,52 @@ let store: StoreType = {
 
         dialogsPage: {
             dialogs: [
-                {id: 1, name: 'Dimych'},
-                {id: 2, name: 'Andrey'},
-                {id: 7, name: 'Ruslan'},
+                {id: 1, name: 'Victor'},
+                {id: 2, name: 'Igor'},
             ],
             messages: [
                 {id: 1, message: 'Hi'},
                 {id: 2, message: 'How are you?'},
-                {id: 3, message: 'Yo'},
             ],
-
         }
     },
-
     _callSubscriber() {
-        debugger;
-        console.log('State changed');
+        console.log('state changed')
     },
 
     getState() {
-        return this._state;
+        return this._state
+    },
+    subscribe (observer) {
+        this._callSubscriber = observer
     },
 
-    subscribe(observer: any) {
-        this._callSubscriber = observer;
-    },
-
-    dispatch(action: ActionType) {
-        if (action.type === ADD_POST) {
-            let newPost = {
-                id: 5,
-                message: this._state.profilePage.newPostText,
-                likesCount: 0
-            };
-
-            this._state.profilePage.posts.push(newPost);
-            this._state.profilePage.newPostText = '';
-
-            this._callSubscriber(this._state);
-        }else if (action.type === UPDATE_NEW_POST_TEXT){
-            this._state.profilePage.newPostText = action.newText;
-            this._callSubscriber(this._state);
+    dispatch(action) {
+        if(action.type === ADD_POST) {
+            let newPost: PostType = {
+                id: new Date().getTime(),
+                message: action.postMessage,
+                likesCount: 2
+            }
+            this._state.profilePage.posts.unshift(newPost)
+            this._callSubscriber()
+        } else if(action.type === UPDATE_NEW_POST_TEXT) {
+            this._state.profilePage.newPostText = action.newText
+            this._callSubscriber()
         }
-    },
-}
-
-export const addPostActionCreator = () => {
-    return {
-        type: ADD_POST
     }
 }
 
-export const updateNewPostTextActionCreator = (text: string) => {
+
+export const addPostActionCreator = (text: string) => {
+    return {
+        type: ADD_POST,
+        postMessage: text
+    } as const
+}
+export const updateNewPostTextActionCreator = (newText: string) => {
     return {
         type: UPDATE_NEW_POST_TEXT,
-        newText: text
-    }
+        newText: newText
+    } as const
 }
-
-export default store;

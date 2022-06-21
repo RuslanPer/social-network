@@ -1,25 +1,17 @@
-import store from './redux/state';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import './styles/reset.css';
-import './styles/common.css';
-import {ProfilePageType, DialogsPageType} from './redux/state'
+import {store} from './redux/state';
 
-type rerenderEntireTreePropsType = {
-    profilePage: ProfilePageType
-    dialogsPage: DialogsPageType
-}
 
-let rerenderEntireTree = (state: rerenderEntireTreePropsType) => {
+let rerenderEntireTree = () => {
     ReactDOM.render(
-        <App state={state} dispatch={store.dispatch.bind(store)} />,
+        <App store={store}/>,
         document.getElementById('root')
     );
-}
+};
 
-rerenderEntireTree(store.getState());
+rerenderEntireTree();
 
 store.subscribe(rerenderEntireTree);
-
