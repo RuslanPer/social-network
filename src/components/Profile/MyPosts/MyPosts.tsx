@@ -1,16 +1,15 @@
 import React from 'react';
 import style from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {PostType} from "../../../redux/state";
+import {AddPostActionType, PostType, UpdateNewPostTextActionType} from "../../../redux/state";
 
 type MyPostsPropsType = {
     posts: PostType[]
     newPostText: string
-    addPost: (postMessage: string) => void
-    updateNewPostText: (newText: string) => void
+    dispatch: (action: AddPostActionType | UpdateNewPostTextActionType) => void
 }
 
-const MyPosts: React.FC<MyPostsPropsType> = ({posts, addPost, newPostText, updateNewPostText}) => {
+const MyPosts: React.FC<MyPostsPropsType> = ({posts, dispatch, newPostText}) => {
 
     let postElements = posts.map( p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>);
 
@@ -19,15 +18,15 @@ const MyPosts: React.FC<MyPostsPropsType> = ({posts, addPost, newPostText, updat
     const addPostHandler = () => {
         if (newPostElement.current) {
             let text = newPostElement.current.value
-            addPost(text)
-            updateNewPostText('')
+            dispatch({type: 'ADD-POST', postMessage: text})
+            dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: ''})
         }
     };
 
     const onPostChangeHandler = () => {
         if (newPostElement.current) {
             let text = newPostElement.current.value
-            updateNewPostText(text)
+            dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: text})
         }
     }
 
