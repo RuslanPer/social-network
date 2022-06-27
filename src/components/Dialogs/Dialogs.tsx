@@ -4,9 +4,12 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {
     ActionsType,
-    DialogsPageType, sendMessageActionCreator,
-    updateNewMessageTextActionCreator
+    DialogsPageType
 } from "../../redux/state";
+import {
+    sendMessageActionCreator,
+    updateNewMessageTextActionCreator
+} from "../../redux/dialogsReducer";
 
 type DialogsPropsType = {
     dialogsPage: DialogsPageType
