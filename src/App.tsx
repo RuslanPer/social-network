@@ -22,7 +22,8 @@ const App: React.FC<AppPropsType> = ({store}) => {
                            render={ () => <Profile profilePage={store.getState().profilePage}
                                                    dispatch={store.dispatch.bind(store)}/>}/>
                     <Route path='/dialogs'
-                           render={ () => <Dialogs dialogsPage={store.getState().dialogsPage}/>}/>
+                           render={ () => <Dialogs dialogsPage={store.getState().dialogsPage}
+                                                   dispatch={store.dispatch.bind(store)}/>}/>
                 </div>
             </div>
         </BrowserRouter>
