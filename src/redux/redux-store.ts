@@ -10,6 +10,7 @@ import dialogsReducer, {
     updateNewMessageTextActionCreator
 } from "./dialogsReducer";
 
+
 export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType

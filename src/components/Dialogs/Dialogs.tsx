@@ -3,33 +3,32 @@ import style from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {
-    DialogsPageType,
-    sendMessageActionCreator,
-    updateNewMessageTextActionCreator
+    DialogsPageType
 } from "../../redux/dialogsReducer";
-import {ActionsType} from "../../redux/redux-store";
 
 type DialogsPropsType = {
     dialogsPage: DialogsPageType
-    dispatch: (action: ActionsType) => void
+    updateNewMessageText: (text: string) => void
+    sendMessage: () => void
 }
 
-const Dialogs: React.FC<DialogsPropsType> = ({dialogsPage, dispatch}) => {
-    let dialogsElements = dialogsPage.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>);
-    let messagesElements = dialogsPage.messages.map( m => <Message key={m.id} message={m.message}/>);
+const Dialogs: React.FC<DialogsPropsType> = ({dialogsPage, updateNewMessageText, sendMessage}) => {
 
-    let newMessageElement = React.createRef<HTMLTextAreaElement>()
+    const dialogsElements = dialogsPage.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>);
+    const messagesElements = dialogsPage.messages.map( m => <Message key={m.id} message={m.message}/>);
 
-    const onClickSendMessageHandler = () => {
+    const newMessageElement = React.createRef<HTMLTextAreaElement>()
+
+    const onClickSendMessage = () => {
         if (newMessageElement.current) {
-            dispatch(sendMessageActionCreator())
-            dispatch(updateNewMessageTextActionCreator(''))
+            sendMessage()
+            updateNewMessageText('')
         }
     }
-    const onChangeNewMessageHandler = () => {
+    const onChangeNewMessage = () => {
         if (newMessageElement.current) {
             let text = newMessageElement.current.value
-            dispatch(updateNewMessageTextActionCreator(text))
+            updateNewMessageText(text)
         }
     }
 
@@ -42,9 +41,9 @@ const Dialogs: React.FC<DialogsPropsType> = ({dialogsPage, dispatch}) => {
                 {messagesElements}
                 <textarea placeholder={'Enter your message'}
                           value={dialogsPage.newMessageText}
-                          onChange={onChangeNewMessageHandler}
+                          onChange={onChangeNewMessage}
                           ref={newMessageElement}></textarea>
-                <button onClick={onClickSendMessageHandler}>send</button>
+                <button onClick={onClickSendMessage}>send</button>
             </div>
         </div>
     );

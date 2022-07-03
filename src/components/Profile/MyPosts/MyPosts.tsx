@@ -1,33 +1,33 @@
 import React from 'react';
 import style from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {addPostActionCreator, PostType, updateNewPostTextActionCreator} from "../../../redux/profileReducer";
-import {ActionsType} from "../../../redux/redux-store";
+import {PostType} from "../../../redux/profileReducer";
 
 type MyPostsPropsType = {
     posts: PostType[]
     newPostText: string
-    dispatch: (action: ActionsType) => void
+    updateNewPostText: (text: string) => void
+    addPost: (text: string) => void
 }
 
-const MyPosts: React.FC<MyPostsPropsType> = ({posts, dispatch, newPostText}) => {
+const MyPosts: React.FC<MyPostsPropsType> = ({posts, updateNewPostText, addPost, newPostText}) => {
 
-    let postElements = posts.map( p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>);
+    let postElements = posts.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>);
 
     let newPostElement = React.createRef<HTMLTextAreaElement>();
 
-    const addPostHandler = () => {
+    const onAddPost = () => {
         if (newPostElement.current) {
             let text = newPostElement.current.value
-            dispatch(addPostActionCreator(text))
-            dispatch(updateNewPostTextActionCreator(''))
+            addPost(text)
+            updateNewPostText('')
         }
     };
 
-    const onPostChangeHandler = () => {
+    const onPostChange = () => {
         if (newPostElement.current) {
             let text = newPostElement.current.value
-            dispatch(updateNewPostTextActionCreator(text))
+            updateNewPostText(text)
         }
     }
 
@@ -36,10 +36,10 @@ const MyPosts: React.FC<MyPostsPropsType> = ({posts, dispatch, newPostText}) => 
             <div className={style.postsBlock}>
                 <div className={style.newPost}>
                     <textarea placeholder={'What\'s Your Mind ? Hamse!'}
-                              onChange={ onPostChangeHandler }
-                              ref={ newPostElement }
-                              value={ newPostText }/>
-                    <button onClick={ addPostHandler }>Share</button>
+                              onChange={onPostChange}
+                              ref={newPostElement}
+                              value={newPostText}/>
+                    <button onClick={onAddPost}>Share</button>
                 </div>
                 <div className={style.posts}>
                     {postElements}
@@ -48,7 +48,6 @@ const MyPosts: React.FC<MyPostsPropsType> = ({posts, dispatch, newPostText}) => 
         </div>
     );
 }
-
 
 
 export default MyPosts;

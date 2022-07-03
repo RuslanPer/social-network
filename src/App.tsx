@@ -9,6 +9,8 @@ import {EmptyObject, Store} from "redux";
 import {ActionsType} from "./redux/redux-store";
 import {ProfilePageType} from "./redux/profileReducer";
 import {DialogsPageType} from "./redux/dialogsReducer";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
+
 
 type AppPropsType = {
     store: Store<EmptyObject & { profilePage: ProfilePageType; dialogsPage: DialogsPageType; }, ActionsType>
@@ -22,11 +24,9 @@ const App: React.FC<AppPropsType> = ({store}) => {
                 <Navbar />
                 <div className='app-wrapper-content'>
                     <Route path='/profile'
-                           render={ () => <Profile profilePage={store.getState().profilePage}
-                                                   dispatch={store.dispatch.bind(store)}/>}/>
+                           render={ () => <Profile store={store}/>}/>
                     <Route path='/dialogs'
-                           render={ () => <Dialogs dialogsPage={store.getState().dialogsPage}
-                                                   dispatch={store.dispatch.bind(store)}/>}/>
+                           render={ () => <DialogsContainer store={store}/>}/>
                 </div>
             </div>
         </BrowserRouter>
