@@ -1,9 +1,36 @@
-import {ActionsType, DialogsPageType} from "./state";
+import {ActionsType} from "./redux-store";
+
 
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 const SEND_MESSAGE = 'SEND_MESSAGE';
 
-const dialogsReducer = (state: DialogsPageType, action: ActionsType) => {
+type DialogType = {
+    id: number
+    name: string
+}
+type MessageType = {
+    id: number
+    message: string
+}
+export type DialogsPageType = {
+    dialogs: DialogType[]
+    messages: MessageType[]
+    newMessageText: string
+}
+
+const initialState: DialogsPageType = {
+    dialogs: [
+        {id: 1, name: 'Victor'},
+        {id: 2, name: 'Igor'},
+    ],
+    messages: [
+        {id: 1, message: 'Hi'},
+        {id: 2, message: 'How are you?'},
+    ],
+    newMessageText: ''
+}
+
+const dialogsReducer = (state: DialogsPageType = initialState , action: ActionsType) => {
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_TEXT:
             state.newMessageText = action.newText

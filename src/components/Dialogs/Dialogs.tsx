@@ -3,13 +3,11 @@ import style from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {
-    ActionsType,
-    DialogsPageType
-} from "../../redux/state";
-import {
+    DialogsPageType,
     sendMessageActionCreator,
     updateNewMessageTextActionCreator
 } from "../../redux/dialogsReducer";
+import {ActionsType} from "../../redux/redux-store";
 
 type DialogsPropsType = {
     dialogsPage: DialogsPageType
@@ -17,7 +15,6 @@ type DialogsPropsType = {
 }
 
 const Dialogs: React.FC<DialogsPropsType> = ({dialogsPage, dispatch}) => {
-
     let dialogsElements = dialogsPage.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>);
     let messagesElements = dialogsPage.messages.map( m => <Message key={m.id} message={m.message}/>);
 

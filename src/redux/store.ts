@@ -1,7 +1,7 @@
 import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from "./profileReducer";
 import dialogsReducer, {sendMessageActionCreator, updateNewMessageTextActionCreator} from "./dialogsReducer";
 
-export type PostType = {
+type PostType = {
     id: number
     message: string
     likesCount: number
@@ -14,21 +14,21 @@ type MessageType = {
     id: number
     message: string
 }
-export type ProfilePageType = {
+type ProfilePageType = {
     posts: PostType[]
     newPostText: string
 }
-export type DialogsPageType = {
+type DialogsPageType = {
     dialogs: DialogType[]
     messages: MessageType[]
     newMessageText: string
 }
-export type RootStateType = {
+type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
 }
 
-export type StoreType = {
+type StoreType = {
     _state: RootStateType
     _callSubscriber: () => void
     getState: () => RootStateType
@@ -36,13 +36,12 @@ export type StoreType = {
     dispatch: (action: ActionsType) => void
 }
 
-export type ActionsType = ReturnType<typeof addPostActionCreator> |
+type ActionsType = ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof updateNewPostTextActionCreator> |
     ReturnType<typeof sendMessageActionCreator> |
     ReturnType<typeof updateNewMessageTextActionCreator>
 
-
-export const store: StoreType = {
+const store: StoreType = {
     _state: {
         profilePage: {
             posts: [
