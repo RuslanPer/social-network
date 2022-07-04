@@ -1,4 +1,4 @@
-import {ActionsType} from "./redux-store";
+import {ActionsType} from "./store";
 
 
 const ADD_POST = 'ADD-POST';

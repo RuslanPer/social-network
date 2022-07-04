@@ -1,33 +1,37 @@
 import React from 'react';
 import {
-    DialogsPageType,
     sendMessageActionCreator,
     updateNewMessageTextActionCreator
 } from "../../redux/dialogsReducer";
-import {ActionsType, RootStateType} from "../../redux/redux-store";
-import {EmptyObject, Store} from "redux";
-import {ProfilePageType} from "../../redux/profileReducer";
 import Dialogs from "./Dialogs";
+import StoreContext from '../../StoreContext';
+import {RootStateType} from "../../redux/store";
 
 
-type DialogsPropsType = {
-    store: Store<EmptyObject & { profilePage: ProfilePageType; dialogsPage: DialogsPageType; }, ActionsType>
-}
+type DialogsPropsType = {}
 
 
-const DialogsContainer: React.FC<DialogsPropsType> = ({store}) => {
-
-    const state: RootStateType = store.getState()
-    const onClickSendMessage = () => {
-        store.dispatch(sendMessageActionCreator())
-    }
-    const onChangeNewMessage = (text: string) => {
-        store.dispatch(updateNewMessageTextActionCreator(text))
-    }
-
-    return <Dialogs dialogsPage={state.dialogsPage}
-                    updateNewMessageText={onChangeNewMessage}
-                    sendMessage={onClickSendMessage}/>
+const DialogsContainer: React.FC<DialogsPropsType> = () => {
+    return (
+        <StoreContext.Consumer>
+            {
+                (store) => {
+                    const state: RootStateType = store.getState()
+                    const onClickSendMessage = () => {
+                        store.dispatch(sendMessageActionCreator())
+                    }
+                    const onChangeNewMessage = (text: string) => {
+                        store.dispatch(updateNewMessageTextActionCreator(text))
+                    }
+                    return (
+                        <Dialogs dialogsPage={state.dialogsPage}
+                                 updateNewMessageText={onChangeNewMessage}
+                                 sendMessage={onClickSendMessage}/>
+                    )
+                }
+            }
+        </StoreContext.Consumer>
+    )
 }
 
 export default DialogsContainer;
