@@ -1,6 +1,5 @@
 import {ActionsType} from "./store";
 
-
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 const SEND_MESSAGE = 'SEND_MESSAGE';
 
@@ -12,25 +11,22 @@ type MessageType = {
     id: number
     message: string
 }
-export type DialogsPageType = {
-    dialogs: DialogType[]
-    messages: MessageType[]
-    newMessageText: string
-}
 
-const initialState: DialogsPageType = {
+const initialState = {
     dialogs: [
         {id: 1, name: 'Victor'},
         {id: 2, name: 'Igor'},
-    ],
+    ] as Array<DialogType>,
     messages: [
         {id: 1, message: 'Hi'},
         {id: 2, message: 'How are you?'},
-    ],
+    ] as Array<MessageType>,
     newMessageText: ''
 }
 
-const dialogsReducer = (state: DialogsPageType = initialState , action: ActionsType) => {
+export type InitialStateType = typeof initialState
+
+const dialogsReducer = (state: InitialStateType = initialState , action: ActionsType): InitialStateType => {
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_TEXT:
             state.newMessageText = action.newText
@@ -43,7 +39,6 @@ const dialogsReducer = (state: DialogsPageType = initialState , action: ActionsT
         default:
             return state;
     }
-
 }
 
 export const sendMessageActionCreator = () => {

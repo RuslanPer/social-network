@@ -7,10 +7,7 @@ import Profile from "./components/Profile/Profile";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 
-type AppPropsType = {
-}
-
-const App: React.FC<AppPropsType> = () => {
+const App: React.FC = () => {
     return (
         <div className="app-wrapper">
             <Header />
