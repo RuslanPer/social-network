@@ -23,12 +23,12 @@ type DialogsPageType = {
     messages: MessageType[]
     newMessageText: string
 }
-export type RootStateType = {
+type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
 }
 
-export type StoreType = {
+type StoreType = {
     _state: RootStateType
     _callSubscriber: () => void
     getState: () => RootStateType
@@ -36,10 +36,11 @@ export type StoreType = {
     dispatch: (action: ActionsType) => void
 }
 
-export type ActionsType = ReturnType<typeof addPostActionCreator> |
+type ActionsType = ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof updateNewPostTextActionCreator> |
     ReturnType<typeof sendMessageActionCreator> |
     ReturnType<typeof updateNewMessageTextActionCreator>
+
 
 const store: StoreType = {
     _state: {
