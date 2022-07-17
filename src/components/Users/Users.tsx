@@ -1,37 +1,16 @@
 import React from "react";
 import {UsersPropsType} from "./UsersContainer";
 import style from './Users.module.css'
+import axios from "axios";
+import userPhoto from '../../assets/images/user.png'
 
 
 const Users: React.FC<UsersPropsType> = ({users, follow, unfollow, setUsers}) => {
 
     if (users.length === 0) {
-        setUsers([
-            {
-                id: 1,
-                photoUrl: "http://demo.foxthemes.net/socialitev2.2/assets/images/avatars/avatar-8.jpg",
-                followed: false,
-                fullName: "Dmitry",
-                status: "I am a boss",
-                location: {city: 'Minks', country: 'Belarus'}
-            },
-            {
-                id: 2,
-                photoUrl: "http://demo.foxthemes.net/socialitev2.2/assets/images/avatars/avatar-8.jpg",
-                followed: true,
-                fullName: "Sasha",
-                status: "I am a boss too",
-                location: {city: 'Moscow', country: 'Russia'}
-            },
-            {
-                id: 3,
-                photoUrl: "http://demo.foxthemes.net/socialitev2.2/assets/images/avatars/avatar-8.jpg",
-                followed: false,
-                fullName: "Ruslan",
-                status: "I am a boss too",
-                location: {city: 'Kazan', country: 'Russia'}
-            },
-        ])
+        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+            setUsers(response.data.items)
+        });
     }
 
     return (
@@ -41,14 +20,10 @@ const Users: React.FC<UsersPropsType> = ({users, follow, unfollow, setUsers}) =>
                 {
                     users.map(u => <div key={u.id} className={style.item}>
                         <div className={style.avatar}>
-                            <img src={u.photoUrl} alt="avatar"/>
+                            <img src={u.photos.small !== null ? u.photos.small : userPhoto} alt="avatar"/>
                         </div>
                         <div className={style.info}>
-                            <h3 className={style.name}>{u.fullName}</h3>
-                            <div className={style.location}>
-                                <span>{u.location.city}</span>
-                                <span>{u.location.country}</span>
-                            </div>
+                            <h3 className={style.name}>{u.name}</h3>
                             <div>
                                 {u.followed
                                     ? <button className={style.button} onClick={() => unfollow(u.id)}>Unfollow</button>

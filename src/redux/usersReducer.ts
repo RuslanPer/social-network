@@ -5,47 +5,23 @@ const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
 
-type LocationType = {
-    city: string
-    country: string
+
+type PhotosType = {
+    small: string | null
+    large: string | null
 }
 
 export type UserType = {
+    name: string
     id: number
-    photoUrl: string
+    uniqueUrlName: string | null
+    photos: PhotosType
+    status: string | null
     followed: boolean
-    fullName: string
-    status: string
-    location: LocationType
 }
 
 const initialState = {
-    users: [
-        {
-            id: 1,
-            photoUrl: "http://demo.foxthemes.net/socialitev2.2/assets/images/avatars/avatar-8.jpg",
-            followed: false,
-            fullName: "Dmitry",
-            status: "I am a boss",
-            location: {city: 'Minks', country: 'Belarus'}
-        },
-        {
-            id: 2,
-            photoUrl: "http://demo.foxthemes.net/socialitev2.2/assets/images/avatars/avatar-8.jpg",
-            followed: true,
-            fullName: "Sasha",
-            status: "I am a boss too",
-            location: {city: 'Moscow', country: 'Russia'}
-        },
-        {
-            id: 3,
-            photoUrl: "http://demo.foxthemes.net/socialitev2.2/assets/images/avatars/avatar-8.jpg",
-            followed: false,
-            fullName: "Ruslan",
-            status: "I am a boss too",
-            location: {city: 'Kazan', country: 'Russia'}
-        },
-    ] as Array<UserType>,
+    users: [] as Array<UserType>,
 }
 
 export type initialStateType = typeof initialState
