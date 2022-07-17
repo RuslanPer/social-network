@@ -7,11 +7,14 @@ import userPhoto from '../../assets/images/user.png'
 
 const Users: React.FC<UsersPropsType> = ({users, follow, unfollow, setUsers}) => {
 
-    if (users.length === 0) {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-            setUsers(response.data.items)
-        });
+    const getUsers = () => {
+        if (users.length === 0) {
+            axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+                setUsers(response.data.items)
+            });
+        }
     }
+
 
     return (
         <div className={style.content}>
